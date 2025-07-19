@@ -1,0 +1,19 @@
+# docker-compose.yml para rodar o Main-API e criar a network "CloudNative"
+version: '3.8'
+
+networks:
+  cloudnative:
+    external: true
+    name: CloudNative
+
+services:
+  main-api:
+    build: .
+    container_name: main-api
+    ports:
+      - "8080:8080"
+    networks:
+      - cloudnative
+    environment:
+      - JAVA_OPTS=
+    restart: unless-stopped
