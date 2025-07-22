@@ -51,6 +51,10 @@ public class QuizService {
         System.out.println("Request: \n" + prompt);
         System.out.println("Response from Agent: \n" + responseBody);
 
+        if (responseBody.equals("⚠️ Limite de 5 requisições por minuto atingido. Tente novamente mais tarde.")) {
+            return List.of(Map.of("error", "Limite de requisições atingido. Tente novamente mais tarde."));
+        }
+
         try {
             return objectMapper.readValue(responseBody, new TypeReference<List<Map<String, Object>>>() {
             });
